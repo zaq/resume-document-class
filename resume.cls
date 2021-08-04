@@ -96,7 +96,7 @@
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{1pt}
 \lhead{\thepage}
-\chead{\large{\sc Curriculum Vitae --- PaweÅ‚ Å»ak}}
+\chead{\large{\sc Curriculum Vitae --- Paweł Żak}}
 \rhead{\thepage}
 \cfoot{\footnotesize \it I hereby authorize you to process my personal data
 included in my job application for the needs of the recruitment process.}
