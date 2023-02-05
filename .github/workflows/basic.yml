@@ -1,7 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
-
 
 # Controls when the workflow will run
 on:
@@ -29,4 +26,11 @@ jobs:
       - name: Compile LaTeX document
         uses: dante-ev/latex-action@latest
         with:
-          root_file: test.tex
+          working_directory: src
+          root_file: example.tex
+      - name: Upload document
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v3
+        with:
+          name: example.pdf
+          path: src/example.pdf
