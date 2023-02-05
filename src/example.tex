@@ -1,23 +1,58 @@
 \documentclass{resume}
+\author{Paweł Żak}
 
 \begin{document}
+ \section{Sectioning}
 
- \section{Introduction}
+  The document class allows to divide your CV into logical parts using
+  standard \LaTeX sectioning commands. Inside sections one can create
+  normal paragraphs and use other environments, e.g. \emph{bfseries}:
  
   \begin{bfseries}
-   Here's where you can write a brief summary of your person.
+   Here's where you can write a brief summary description of your person written
+   using \emph{bfseries}
   \end{bfseries}
 
+  Note, that this document class uses \emph{parskip} package, so you can use
+  blank lines to separate paragraphs. However, the paragraph skip has been
+  reduced to 2pt, so the distance between the paragraphs is barely noticeable
+  and allows to fit more information onto a single page.
  
- \section{Personal Details}
+ \section{``factstable''}
 
   A \emph{factstable} environment allows to produce two-column output with label
-  of a personal "fact" on the left and value on the rights.
- 
+  of a personal "fact" on the left and value on the right. It is a wrapper
+  around the \emph{longtable} environment, so it's possible to use extensions
+  from that package. For more informations see
+  \href{http://mirrors.ibiblio.org/CTAN/macros/latex/required/tools/longtable.pdf}{longtable.pdf}
+
+  Below you can see an example of a section featuring simple \emph{factstable}
+  with a handful of personal details.
+
+ \section{Personal Details}
+
   \begin{factstable}
    Name    & John Doe \\
    Address & 524 North Avenue, 68419 Panama, NE \\
    E-mail  & 9glg9om8p4b@temporary-mail.net
+  \end{factstable}
+
+ \section{``fact''}
+
+  The \emph{fact} environment builds on top of \emph{factstable}, allowing to
+  describe more complex events in one's professional life, e.g. projects.
+
+ \section{Work Experience}
+
+  \begin{factstable}
+   Since 01.2020 \newline
+   Baden, Switzerland
+   &
+    \begin{fact}[LaTeX Developer]
+     In 2020 I decided to publish my custom document class for authoring résumés
+     on GitHub. It had turned out to be an immediate success.
+    \end{fact}
+   \\
   \end{factstable}
 
 \end{document}

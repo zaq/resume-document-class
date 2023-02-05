@@ -18,7 +18,9 @@ Install the document class using steps described in
 ```
 
 This will give you access to résumé-specific commands defined in
-[example.tex](src/example.tex).
+[example.tex](src/example.tex). This example file is rendered during every
+build, so you can see if the output is to your liking by visiting the build
+artifacts in the [actions tab](https://github.com/zaq/resume-document-class/actions).
 
 ## Contributing
 

@@ -43,7 +43,7 @@
 % Long table
 \RequirePackage{longtable}
 % For adjusting paragraph distance
-% \RequirePackage{parskip}
+\RequirePackage{parskip}
 % For reformatting section headings
 \RequirePackage{titlesec}
 % color and colorbox commands
@@ -96,7 +96,7 @@
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{1pt}
 \lhead{\thepage}
-\chead{\large{\sc Curriculum Vitae --- Paweł Żak}}
+\chead{\large{\sc Curriculum Vitae --- \@author}}
 \rhead{\thepage}
 \cfoot{\footnotesize \it I hereby authorize you to process my personal data
 included in my job application for the needs of the recruitment process.}
@@ -120,8 +120,6 @@ included in my job application for the needs of the recruitment process.}
 \makeatletter
 %% Enlarge a distance between items in the factstable:
 \renewcommand{\arraystretch}{1.3}
-% Reduce the distance between a paragraph and a long table
-\setlength{\LTpre}{-0.8\baselineskip}
 %%%%
 
 \newenvironment{fact}[1][\empty]{%
