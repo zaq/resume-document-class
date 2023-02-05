@@ -19,3 +19,8 @@ Install the document class using steps described in
 
 This will give you access to résumé-specific commands defined in
 [example.tex](src/example.tex).
+
+## Contributing
+
+If you would like to contribute, clone the directory and run `make.ps1` to build
+the example files locally (requires PowerShell Core and Docker).
