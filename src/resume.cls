@@ -96,7 +96,8 @@
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{1pt}
 \lhead{\thepage}
-\chead{\large{\sc Curriculum Vitae --- \@author}}
+\def\@author{} % Reset author to empty value, regardless of that article class has
+\chead{\large{\sc Curriculum Vitae\ifx\@author\empty\else --- \@author\fi}}
 \rhead{\thepage}
 \cfoot{\footnotesize \it I hereby authorize you to process my personal data
 included in my job application for the needs of the recruitment process.}
@@ -137,9 +138,9 @@ included in my job application for the needs of the recruitment process.}
 
 \newcommand{\factheading}[1]{\multicolumn{2}{c}{\bf #1}\\\hline}
 \newcommand{\highlights}[1]{
- \begin{flushleft}
+ \begin{flushright}
   {\bfseries #1}
- \end{flushleft}
+ \end{flushright}
 }
 
 \pagestyle{fancy}
