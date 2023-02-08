@@ -15,7 +15,6 @@
 \LoadClass[oneside,a4paper,11pt]{article}
 %%%%
 
-
 %%%%
 % Second come all the packages
 %
@@ -33,8 +32,10 @@
 % \RequirePackage[top=.8in,bottom=1in,left=.8in,right=.8in]{geometry}
 % \includegraphics with PNG support
 \RequirePackage{graphicx}
-% links within document
-\definecolor{DarkBlue}{rgb}{0.1,0,0.55}
+% color and colorbox commands
+\RequirePackage[usenames]{xcolor}
+% links within document (require xcolor from above):
+\definecolor{DarkBlue}{rgb}{0.100, 0.000, 0.550}
 \RequirePackage[colorlinks,urlcolor=DarkBlue]{hyperref}
 % no idea, paths with white characters AFAIK
 \RequirePackage[space]{grffile}
@@ -46,11 +47,12 @@
 \RequirePackage{parskip}
 % For reformatting section headings
 \RequirePackage{titlesec}
-% color and colorbox commands
-\RequirePackage[usenames]{xcolor}
 % \xspace -- allows to define commands that appear not to eat spaces
 \RequirePackage{xspace}
+% \ifdefempty
+\RequirePackage{etoolbox}
 %%%%
+
 
 \makeatletter
 
@@ -63,21 +65,24 @@
 \setlength{\voffset}{0cm}
 \setlength{\oddsidemargin}{-1.1cm}
 \setlength{\evensidemargin}{-1.1cm}
-\setlength{\footskip}{8pt}
+\setlength{\footskip}{16pt}
 \setlength{\headheight}{16pt}
 \setlength{\textwidth}{18cm}
 \setlength{\textheight}{26cm}
 
 % Create a custom length for parskip, to share it between various environments:
 \newlength{\cv@parskip}
-\setlength{\cv@parskip}{2pt}
+\setlength{\cv@parskip}{2pt plus 2pt} 
 
 % Set the parskip to the custom parskip:
-\setlength{\parskip}{\cv@parskip}
+\setlength{\parskip}{\cv@parskip} % The default parskip is 0 plus 1pt
 
 % Set to 0pt all separators between list items (members of itemize or enumerate
 % environments).
 \setlist{nosep}
+
+% Set the default font to sans-serif
+\renewcommand{\familydefault}{\sfdefault}
 %%%%
 
 %%%%
@@ -87,7 +92,8 @@
  {\relax}                        % format for both label and text
  {}                              % label
  {0pt}                           % space between label and text
- {\large\scshape}
+ {\large\rmfamily\scshape}       % Font for the heading. Note, that we have to
+                                 % use serifs for small caps to work
  [\normalcolor\normalsize\vspace*{.1\baselineskip}\titlerule]% 
 %%%%
 
@@ -96,8 +102,11 @@
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{1pt}
 \lhead{\thepage}
-\def\@author{} % Reset author to empty value, regardless of that article class has
-\chead{\large{\sc Curriculum Vitae\ifx\@author\empty\else --- \@author\fi}}
+\def\@author{} % Reset author to empty value, regardless of that article class
+               % has by default
+\chead{\large{\rmfamily\scshape Curriculum Vitae \ifx\@author\empty\else --- \@author\fi}}
+              % ^ Similarily to the headings, small caps only work with serif
+              % fonts
 \rhead{\thepage}
 \cfoot{\footnotesize \it I hereby authorize you to process my personal data
 included in my job application for the needs of the recruitment process.}
@@ -112,15 +121,15 @@ included in my job application for the needs of the recruitment process.}
    \raggedleft%
    \let\newline\\%
    \footnotesize\itshape%
-   \hspace{0pt}%
-  }p{.16\textwidth}%
-  |p{.79\textwidth}}%
+   \hspace{0pt}% Allows the first word to be hyphneated
+  }p{.20\textwidth}%
+  |p{.75\textwidth}}%
 }{%
  \end{longtable}
 }
 \makeatletter
 %% Enlarge a distance between items in the factstable:
-\renewcommand{\arraystretch}{1.3}
+\renewcommand{\arraystretch}{1.1}
 %%%%
 
 \newenvironment{fact}[1][\empty]{%
@@ -133,7 +142,7 @@ included in my job application for the needs of the recruitment process.}
   \setlength{\parskip}{\cv@parskip}%
 }{%
  \end{minipage}%
- \vspace{1.5\cv@parskip}%
+ \vspace{\baselineskip}%
 }
 
 \newcommand{\factheading}[1]{\multicolumn{2}{c}{\bf #1}\\\hline}
@@ -148,4 +157,3 @@ included in my job application for the needs of the recruitment process.}
 \newcommand{\cvphotoinsert}{\makebox(0,0){\includegraphics[width=75pt, height=100pt]{img/face.jpeg}}}
 
 \makeatother
-
