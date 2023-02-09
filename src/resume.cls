@@ -165,9 +165,10 @@
 
 \newcommand{\factheading}[1]{\multicolumn{2}{c}{\bf #1}\\\hline}
 
-\newcommand{\highlights}[1]{
+\newcommand{\highlights}[1]{%
  \begin{flushright}
-  {\bfseries #1}
+  % We switch to normalfont because one can't bolden italics in our font
+  {\normalfont\bfseries #1} 
  \end{flushright}
 }
 
