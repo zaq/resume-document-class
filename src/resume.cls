@@ -134,7 +134,7 @@ included in my job application for the needs of the recruitment process.}
 
 \newenvironment{fact}[1][\empty]{%
  \ifx\empty#1\relax\else%
-  {\bfseries #1} \newline%
+  {\bfseries #1}\vspace{\cv@parskip}\newline%
   \vspace{\cv@parskip}%
  \fi%
 %
@@ -146,6 +146,7 @@ included in my job application for the needs of the recruitment process.}
 }
 
 \newcommand{\factheading}[1]{\multicolumn{2}{c}{\bf #1}\\\hline}
+
 \newcommand{\highlights}[1]{
  \begin{flushright}
   {\bfseries #1}
