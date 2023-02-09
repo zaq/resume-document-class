@@ -28,6 +28,8 @@
 \RequirePackage{enumitem}
 % Provides methods to modify header and footer contents
 \RequirePackage{fancyhdr}
+% Needed to create nice pictures with text (used for headers)
+\RequirePackage{fourier-orns}
 % Set margins everywhere.
 % \RequirePackage[top=.8in,bottom=1in,left=.8in,right=.8in]{geometry}
 % \includegraphics with PNG support
@@ -66,7 +68,7 @@
 \setlength{\oddsidemargin}{-1.1cm}
 \setlength{\evensidemargin}{-1.1cm}
 \setlength{\footskip}{16pt}
-\setlength{\headheight}{16pt}
+\setlength{\headheight}{20pt}
 \setlength{\textwidth}{18cm}
 \setlength{\textheight}{26cm}
 
@@ -99,17 +101,25 @@
 
 %%%%
 %% Update header and footer
+% \renewcommand\headrule{%
+% \hrulefill
+% \raisebox{-2.1pt}
+% {\quad\decofourleft\decotwo\decofourright\quad}%
+% \hrulefill}
+\renewcommand\headrule{%
+ \hrule width \hsize \kern 2pt \hrule width \hsize
+}
+
 \renewcommand\headrulewidth{1pt}
-\renewcommand\footrulewidth{1pt}
-\lhead{\thepage}
+\renewcommand\footrulewidth{0pt}
 \def\@author{} % Reset author to empty value, regardless of that article class
                % has by default
-\chead{\large{\rmfamily\scshape Curriculum Vitae \ifx\@author\empty\else --- \@author\fi}}
+\chead{\large{\rmfamily\scshape Résumé \ifx\@author\empty\else --- \@author\fi}}
               % ^ Similarily to the headings, small caps only work with serif
               % fonts
-\rhead{\thepage}
-\cfoot{\footnotesize \it I hereby authorize you to process my personal data
-included in my job application for the needs of the recruitment process.}
+\rhead{}
+% \cfoot{\footnotesize \it I hereby authorize you to process my personal data
+% included in my job application for the needs of the recruitment process.}
 %%%%
 
 \makeatother
