@@ -110,11 +110,19 @@
  \hrule width \hsize \kern 2pt \hrule width \hsize
 }
 
+% Take care of the author by redefining the \author command from article class:
+\def\cv@author{}
+\def\cv@title{Résumé \ifx\cv@author\empty\else --- \cv@author\fi}
+\renewcommand{\author}[1]{\def\cv@author{#1}\hypersetup{
+  pdfinfo={
+    Author={\cv@author},
+    Title={\cv@title}
+  }
+}}
+
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{0pt}
-\def\@author{} % Reset author to empty value, regardless of that article class
-               % has by default
-\chead{\large{\rmfamily\scshape Résumé \ifx\@author\empty\else --- \@author\fi}}
+\chead{\large{\rmfamily\scshape\cv@title}}
               % ^ Similarily to the headings, small caps only work with serif
               % fonts
 \rhead{}
