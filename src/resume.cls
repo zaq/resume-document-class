@@ -28,8 +28,6 @@
 \RequirePackage{enumitem}
 % Provides methods to modify header and footer contents
 \RequirePackage{fancyhdr}
-% Needed to create nice pictures with text (used for headers)
-\RequirePackage{fourier-orns}
 % Set margins everywhere.
 % \RequirePackage[top=.8in,bottom=1in,left=.8in,right=.8in]{geometry}
 % \includegraphics with PNG support
@@ -73,11 +71,11 @@
 \setlength{\textheight}{26cm}
 
 % Create a custom length for parskip, to share it between various environments:
-\newlength{\cv@parskip}
-\setlength{\cv@parskip}{2pt plus 2pt} 
+\newlength{\resume@parskip}
+\setlength{\resume@parskip}{2pt plus 2pt} 
 
 % Set the parskip to the custom parskip:
-\setlength{\parskip}{\cv@parskip} % The default parskip is 0 plus 1pt
+\setlength{\parskip}{\resume@parskip} % The default parskip is 0 plus 1pt
 
 % Set to 0pt all separators between list items (members of itemize or enumerate
 % environments).
@@ -101,28 +99,50 @@
 
 %%%%
 %% Update header and footer
-% \renewcommand\headrule{%
-% \hrulefill
-% \raisebox{-2.1pt}
-% {\quad\decofourleft\decotwo\decofourright\quad}%
-% \hrulefill}
 \renewcommand\headrule{%
  \hrule width \hsize \kern 2pt \hrule width \hsize
 }
 
-% Take care of the author by redefining the \author command from article class:
-\def\cv@author{}
-\def\cv@title{Résumé \ifx\cv@author\empty\else --- \cv@author\fi}
-\renewcommand{\author}[1]{\def\cv@author{#1}\hypersetup{
-  pdfinfo={
-    Author={\cv@author},
-    Title={\cv@title}
+% Take care of the author, title and keywords by redefining the \author, \title
+% and \keywords macros by resetting their values:
+\def\@author{} 
+\def\@title{\ifx\@author\empty\else\@author\ --- Résumé\fi}
+\def\@keywords{}
+
+% A helper method for setting up metadata in PDFs, used by \author, \title and
+% \keywords macros:
+\def\resume@setpdfmetadata{%
+  \hypersetup{ %
+    pdfinfo={
+      Author={\@author},
+      Title={\@title},
+      Keywords={\@keywords}
+    }
   }
-}}
+}
+
+% Sets the author in both the internal variable and metadata:
+\renewcommand{\author}[1]{
+  \def\@author{{#1}}
+  \resume@setpdfmetadata
+}
+
+% Event though we have default title, allow the user to override it:
+\renewcommand{\title}[1]{
+  \def\@title{{#1}}
+  \resume@setpdfmetadata
+}
+
+% Sets the keywords in both the internal variable and metadata:
+\newcommand{\keywords}[1]{
+  \def\@keywords{{#1}}
+  \resume@setpdfmetadata
+}
+
 
 \renewcommand\headrulewidth{1pt}
 \renewcommand\footrulewidth{0pt}
-\chead{\large{\rmfamily\scshape\cv@title}}
+\chead{\large{\rmfamily\scshape\@title}}
               % ^ Similarily to the headings, small caps only work with serif
               % fonts
 \rhead{}
@@ -152,12 +172,12 @@
 
 \newenvironment{fact}[1][\empty]{%
  \ifx\empty#1\relax\else%
-  {\bfseries #1}\vspace{\cv@parskip}\newline%
-  \vspace{\cv@parskip}%
+  {\bfseries #1}\vspace{\resume@parskip}\newline%
+  \vspace{\resume@parskip}%
  \fi%
 %
  \begin{minipage}[t]{\linewidth}%
-  \setlength{\parskip}{\cv@parskip}%
+  \setlength{\parskip}{\resume@parskip}%
 }{%
  \end{minipage}%
  \vspace{\baselineskip}%
